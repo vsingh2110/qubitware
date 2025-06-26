@@ -1,0 +1,20 @@
+:root {
+  --primary-color: #1d4ed8; /* Example primary color */
+  --secondary-color: #9333ea; /* Example secondary color */
+  --background-color: #f9fafb; /* Example background color */
+  --text-color: #111827; /* Example text color */
+}
+
+.theme-light {
+  --primary-color: #1d4ed8;
+  --secondary-color: #9333ea;
+  --background-color: #f9fafb;
+  --text-color: #111827;
+}
+
+.theme-dark {
+  --primary-color: #3b82f6; /* Darker primary color */
+  --secondary-color: #a855f7; /* Darker secondary color */
+  --background-color: #1f2937; /* Darker background color */
+  --text-color: #f9fafb; /* Lighter text color */
+}

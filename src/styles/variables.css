@@ -1,0 +1,13 @@
+:root {
+  --primary-color: #1d4ed8; /* Example primary color */
+  --secondary-color: #9333ea; /* Example secondary color */
+  --background-color: #f9fafb; /* Example background color */
+  --text-color: #111827; /* Example text color */
+  --border-color: #e5e7eb; /* Example border color */
+  --font-family: 'Inter', sans-serif; /* Example font family */
+  --font-size-base: 1rem; /* Base font size */
+  --font-size-lg: 1.125rem; /* Large font size */
+  --font-size-sm: 0.875rem; /* Small font size */
+  --border-radius: 0.5rem; /* Border radius */
+  --transition-speed: 0.3s; /* Transition speed */
+}
