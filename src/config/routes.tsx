@@ -16,7 +16,6 @@ import AdminCandidates from '../pages/protected/admin/Candidates';
 import AdminInterviews from '../pages/protected/admin/Interviews';
 import AdminAnalytics from '../pages/protected/admin/Analytics';
 import AdminReports from '../pages/protected/admin/Reports';
-import AdminEmployees from '../pages/protected/admin/Employees';
 import AdminTasks from '../pages/protected/admin/Tasks';
 import AdminSettings from '../pages/protected/admin/Settings';
 
@@ -24,6 +23,13 @@ import CandidateDashboard from '../pages/protected/candidate/Dashboard';
 import CandidateApplications from '../pages/protected/candidate/Applications';
 import CandidateProfile from '../pages/protected/candidate/Profile';
 import CandidateSettings from '../pages/protected/candidate/Settings';
+
+import EmployeesIndex from '../pages/protected/admin/employees/index';
+import EmployeeDetails from '../pages/protected/admin/employees/details';
+import EmployeeCreate from '../pages/protected/admin/employees/create';
+import EmployeeEdit from '../pages/protected/admin/employees/edit';
+import EmployeeDocuments from '../pages/protected/admin/employees/documents';
+import DepartmentsList from '../pages/protected/admin/employees/departments';
 
 const AppRoutes: React.FC = () => {
     return (
@@ -44,9 +50,14 @@ const AppRoutes: React.FC = () => {
             <Route path="/admin/interviews" element={<AdminInterviews />} />
             <Route path="/admin/analytics" element={<AdminAnalytics />} />
             <Route path="/admin/reports" element={<AdminReports />} />
-            <Route path="/admin/employees" element={<AdminEmployees />} />
             <Route path="/admin/tasks" element={<AdminTasks />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
+            <Route path="/admin/employees" element={<EmployeesIndex />} />
+            <Route path="/admin/employees/create" element={<EmployeeCreate />} />
+            <Route path="/admin/employees/:id" element={<EmployeeDetails />} />
+            <Route path="/admin/employees/:id/edit" element={<EmployeeEdit />} />
+            <Route path="/admin/employees/:id/documents" element={<EmployeeDocuments />} />
+            <Route path="/admin/employees/departments" element={<DepartmentsList />} />
 
             {/* Protected Candidate Routes */}
             <Route path="/candidate/dashboard" element={<CandidateDashboard />} />
