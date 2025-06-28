@@ -31,6 +31,22 @@ import EmployeeEdit from '../pages/protected/admin/employees/edit';
 import EmployeeDocuments from '../pages/protected/admin/employees/documents';
 import DepartmentsList from '../pages/protected/admin/employees/departments';
 
+import UsersIndex from '../pages/protected/admin/users/UsersIndex';
+import UserDetails from '../pages/protected/admin/users/details';
+import UserCreate from '../pages/protected/admin/users/create';
+import UserEdit from '../pages/protected/admin/users/edit';
+import UserPermissions from '../pages/protected/admin/users/permissions';
+
+import {
+  ApplicantsIndex,
+  ApplicantDetails,
+  ApplicantCreate,
+  ApplicantEdit,
+  ApplicantResume,
+  ApplicantStatus,
+  ApplicantsSources
+} from '../pages/protected/admin/applicants';
+
 const AppRoutes: React.FC = () => {
     return (
         <Routes>
@@ -58,6 +74,22 @@ const AppRoutes: React.FC = () => {
             <Route path="/admin/employees/:id/edit" element={<EmployeeEdit />} />
             <Route path="/admin/employees/:id/documents" element={<EmployeeDocuments />} />
             <Route path="/admin/employees/departments" element={<DepartmentsList />} />
+
+            {/* Users Management */}
+            <Route path="/admin/users" element={<UsersIndex />} />
+            <Route path="/admin/users/create" element={<UserCreate />} />
+            <Route path="/admin/users/:id" element={<UserDetails />} />
+            <Route path="/admin/users/:id/edit" element={<UserEdit />} />
+            <Route path="/admin/users/:id/permissions" element={<UserPermissions />} />
+
+            {/* Applicants Management */}
+            <Route path="/admin/applicants" element={<ApplicantsIndex />} />
+            <Route path="/admin/applicants/create" element={<ApplicantCreate />} />
+            <Route path="/admin/applicants/:id" element={<ApplicantDetails />} />
+            <Route path="/admin/applicants/:id/edit" element={<ApplicantEdit />} />
+            <Route path="/admin/applicants/:id/resume" element={<ApplicantResume />} />
+            <Route path="/admin/applicants/:id/status" element={<ApplicantStatus />} />
+            <Route path="/admin/applicants/sources" element={<ApplicantsSources />} />
 
             {/* Protected Candidate Routes */}
             <Route path="/candidate/dashboard" element={<CandidateDashboard />} />

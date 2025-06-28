@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppRoutes from './config/routes';
-import EmployeesIndex from './pages/protected/admin/employees/index';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +10,8 @@ const App: React.FC = () => {
         <nav style={{marginTop: '1rem'}}>
           <Link to="/">Home</Link> |{' '}
           <Link to="/admin/employees">Employees</Link> |{' '}
-          <Link to="/admin/employees/create">Create Employee</Link>
+          <Link to="/admin/users">Users</Link> |{' '}
+          <Link to="/admin/applicants">Applicants</Link>
         </nav>
       </header>
       <main style={{padding: '2rem'}}>
