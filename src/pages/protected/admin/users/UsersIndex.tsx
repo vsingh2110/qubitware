@@ -76,7 +76,9 @@ const UsersIndex: React.FC = () => {
           <div>No users found.</div>
         ) : (
           <>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 rounded-md">
+            {/* Mobile scroll hint */}
+            <div className="block md:hidden text-xs text-gray-400 mb-2 ml-1">Swipe to scroll table &rarr;</div>
             <table className="w-full border-collapse bg-white rounded-lg shadow-sm text-sm md:text-base">
               <thead>
                 <tr className="bg-gray-50">
