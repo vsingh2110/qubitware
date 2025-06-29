@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaUserPlus, FaArrowLeft } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { FaClipboardList } from 'react-icons/fa';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 
 const STATUS_VALUES = [
   'applied',
@@ -35,19 +39,41 @@ const ApplicantCreate: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Create Applicant</h2>
-      <form onSubmit={handleSubmit}>
-        <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" required />
-        <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required />
-        <select value={status} onChange={e => setStatus(e.target.value)} required>
-          {STATUS_VALUES.map(s => (
-            <option key={s} value={s}>{s.replace('_',' ').toUpperCase()}</option>
-          ))}
-        </select>
-        <button type="submit">Create</button>
-      </form>
-      {message && <div>{message}</div>}
+    <div className="max-w-md w-full mx-auto px-2 sm:px-0 mt-8">
+      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+        <h2 className="flex items-center gap-3 mb-6 text-xl font-bold text-gray-800">
+          <FaUserPlus className="text-blue-600" /> Create Applicant
+        </h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            Name
+            <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" required className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200" />
+          </label>
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            <span className="flex items-center gap-2"><MdEmail /> Email</span>
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required type="email" className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200" />
+          </label>
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            <span className="flex items-center gap-2"><FaClipboardList /> Status</span>
+            <select value={status} onChange={e => setStatus(e.target.value)} required className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200">
+              {STATUS_VALUES.map(s => (
+                <option key={s} value={s}>{s.replace('_',' ').toUpperCase()}</option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold transition">
+            <IoMdCheckmarkCircleOutline /> Create
+          </button>
+        </form>
+        {message && <div className="mt-4 text-green-600 flex items-center gap-2 font-medium"><IoMdCheckmarkCircleOutline /> {message}</div>}
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 mt-6 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-md text-slate-500 font-medium transition"
+        >
+          <FaArrowLeft /> Go Back
+        </button>
+      </div>
     </div>
   );
 };

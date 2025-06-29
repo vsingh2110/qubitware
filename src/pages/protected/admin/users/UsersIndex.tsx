@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaUser, FaEnvelope, FaUserShield, FaEye, FaRegEdit, FaTrash, FaPlus, FaListUl } from 'react-icons/fa';
 
 interface User {
   id: string;
@@ -53,56 +54,64 @@ const UsersIndex: React.FC = () => {
   const paginated = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
 
   return (
-    <div style={{maxWidth:700,margin:'0 auto',padding:24}}>
-      <h2 style={{marginBottom:16}}>All Users</h2>
-      <nav style={{position:'sticky',top:0,background:'#f8f9fa',padding:'8px 0',zIndex:10,marginBottom:16,borderBottom:'1px solid #eee'}}>
-        <Link to="/admin/users" style={{marginRight:12,fontWeight:location.pathname==='/admin/users'?'bold':'normal'}}>List</Link>
-        <Link to="/admin/users/create" style={{marginRight:12,fontWeight:location.pathname==='/admin/users/create'?'bold':'normal'}}>Create</Link>
-      </nav>
-      <div style={{marginBottom:16}}>
-        <label>Filter by Role: </label>
-        <select value={roleFilter} onChange={e => {setRoleFilter(e.target.value);setPage(1);}}>
-          <option value="">All</option>
-          {ROLES.map(r => <option key={r} value={r}>{r.replace('_',' ').toUpperCase()}</option>)}
-        </select>
-      </div>
-      {loading ? (
-        <div>Loading users...</div>
-      ) : paginated.length === 0 ? (
-        <div>No users found.</div>
-      ) : (
-        <>
-        <table style={{width:'100%',borderCollapse:'collapse',background:'#fff',boxShadow:'0 2px 8px #eee'}}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map(user => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
-                  <Link to={`/admin/users/${user.id}`}>View</Link> |{' '}
-                  <Link to={`/admin/users/${user.id}/edit`}>Edit</Link> |{' '}
-                  <button onClick={() => handleDelete(user.id)} style={{color:'red',background:'none',border:'none',cursor:'pointer'}}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div style={{marginTop:16,display:'flex',justifyContent:'center',gap:8}}>
-          <button onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}>Prev</button>
-          <span>Page {page} of {totalPages}</span>
-          <button onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages}>Next</button>
+    <div className="max-w-full md:max-w-4xl mx-auto p-2 md:p-8">
+      <div className="bg-white rounded-xl shadow-lg p-2 md:p-8">
+        <h2 className="flex items-center gap-2 mb-6 text-lg md:text-2xl font-semibold">
+          <FaUser className="text-blue-600" /> All Users
+        </h2>
+        <nav className="sticky top-0 bg-gray-50 py-2 z-10 mb-6 border-b border-gray-200 flex flex-wrap gap-2 md:gap-4">
+          <Link to="/admin/users" className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium ${location.pathname==='/admin/users' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-blue-700'}`}><FaListUl /> List</Link>
+          <Link to="/admin/users/create" className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium ${location.pathname==='/admin/users/create' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-green-700'}`}><FaPlus /> Create</Link>
+        </nav>
+        <div className="mb-4 flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4">
+          <label className="font-medium">Filter by Role:</label>
+          <select value={roleFilter} onChange={e => {setRoleFilter(e.target.value);setPage(1);}} className="p-2 rounded-md border border-gray-300 w-full md:w-auto">
+            <option value="">All</option>
+            {ROLES.map(r => <option key={r} value={r}>{r.replace('_',' ').toUpperCase()}</option>)}
+          </select>
         </div>
-        </>
-      )}
+        {loading ? (
+          <div>Loading users...</div>
+        ) : paginated.length === 0 ? (
+          <div>No users found.</div>
+        ) : (
+          <>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse bg-white rounded-lg shadow-sm text-sm md:text-base">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="p-3 border border-gray-200 text-left"><FaUser /> Name</th>
+                  <th className="p-3 border border-gray-200 text-left"><FaEnvelope /> Email</th>
+                  <th className="p-3 border border-gray-200 text-left"><FaUserShield /> Role</th>
+                  <th className="p-3 border border-gray-200 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginated.map((user, idx) => (
+                  <tr key={user.id} className={idx%2===1 ? 'bg-gray-50' : 'bg-white'}>
+                    <td className="p-3 border border-gray-200">
+                      <Link to={`/admin/users/${user.id}`} className="text-blue-700 font-medium">{user.name}</Link>
+                    </td>
+                    <td className="p-3 border border-gray-200">{user.email}</td>
+                    <td className="p-3 border border-gray-200">{user.role.replace('_',' ').toUpperCase()}</td>
+                    <td className="p-3 border border-gray-200 flex gap-2 flex-wrap">
+                      <Link to={`/admin/users/${user.id}`} title="View" className="text-teal-700 bg-gray-100 px-2 py-1 rounded flex items-center gap-1"><FaEye /></Link>
+                      <Link to={`/admin/users/${user.id}/edit`} title="Edit" className="text-blue-700 bg-gray-100 px-2 py-1 rounded flex items-center gap-1"><FaRegEdit /></Link>
+                      <button onClick={() => handleDelete(user.id)} title="Delete" className="text-red-700 bg-gray-100 px-2 py-1 rounded flex items-center gap-1 cursor-pointer border-0"><FaTrash /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-6 flex justify-center gap-4">
+            <button onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1} className="px-4 py-2 rounded-md border border-gray-300 bg-gray-100 text-blue-700 font-medium disabled:opacity-50">Prev</button>
+            <span className="self-center">Page {page} of {totalPages}</span>
+            <button onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages} className="px-4 py-2 rounded-md border border-gray-300 bg-gray-100 text-blue-700 font-medium disabled:opacity-50">Next</button>
+          </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

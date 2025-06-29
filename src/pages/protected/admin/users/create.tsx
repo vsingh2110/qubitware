@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUserPlus } from 'react-icons/fa';
+import { FaUserPlus, FaArrowLeft } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiShieldUserLine } from 'react-icons/ri';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
@@ -33,31 +33,42 @@ const UserCreate: React.FC = () => {
   };
 
   return (
-    <div style={{maxWidth:400,margin:'2rem auto',background:'#fff',padding:32,borderRadius:12,boxShadow:'0 2px 16px #e5e7eb'}}>
-      <h2 style={{display:'flex',alignItems:'center',gap:8,marginBottom:24}}><FaUserPlus /> Create User</h2>
-      <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',gap:16}}>
-        <label style={{display:'flex',alignItems:'center',gap:8}}>
-          <span>Name</span>
-          <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" required style={{flex:1,padding:8,borderRadius:6,border:'1px solid #d1d5db'}} />
-        </label>
-        <label style={{display:'flex',alignItems:'center',gap:8}}>
-          <MdEmail />
-          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required type="email" style={{flex:1,padding:8,borderRadius:6,border:'1px solid #d1d5db'}} />
-        </label>
-        <label style={{display:'flex',alignItems:'center',gap:8}}>
-          <RiShieldUserLine />
-          <select value={role} onChange={e => setRole(e.target.value)} required style={{flex:1,padding:8,borderRadius:6,border:'1px solid #d1d5db'}}>
-            <option value="" disabled>Select Role</option>
-            {ROLES.map(r => (
-              <option key={r} value={r}>{r.replace('_',' ').toUpperCase()}</option>
-            ))}
-          </select>
-        </label>
-        <button type="submit" style={{background:'#2563eb',color:'#fff',padding:'10px 0',border:'none',borderRadius:6,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
-          <IoMdCheckmarkCircleOutline /> Create
+    <div className="max-w-md w-full mx-auto px-2 sm:px-0 mt-8">
+      <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+        <h2 className="flex items-center gap-3 mb-6 text-xl font-bold text-gray-800">
+          <FaUserPlus className="text-blue-600" /> Create User
+        </h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            Name
+            <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" required className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200" />
+          </label>
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            <span className="flex items-center gap-2"><MdEmail /> Email</span>
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required type="email" className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200" />
+          </label>
+          <label className="flex flex-col gap-1 font-medium text-gray-700">
+            <span className="flex items-center gap-2"><RiShieldUserLine /> Role</span>
+            <select value={role} onChange={e => setRole(e.target.value)} required className="mt-1 p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200">
+              <option value="" disabled>Select Role</option>
+              {ROLES.map(r => (
+                <option key={r} value={r}>{r.replace('_',' ').toUpperCase()}</option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold transition">
+            <IoMdCheckmarkCircleOutline /> Create
+          </button>
+        </form>
+        {message && <div className="mt-4 text-green-600 flex items-center gap-2 font-medium"><IoMdCheckmarkCircleOutline /> {message}</div>}
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 mt-6 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-md text-slate-500 font-medium transition"
+        >
+          <FaArrowLeft /> Go Back
         </button>
-      </form>
-      {message && <div style={{marginTop:16,color:'#16a34a',display:'flex',alignItems:'center',gap:8}}><IoMdCheckmarkCircleOutline /> {message}</div>}
+      </div>
     </div>
   );
 };
